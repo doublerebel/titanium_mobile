@@ -156,6 +156,10 @@ JNIEXPORT void JNICALL Java_org_appcelerator_kroll_runtime_v8_V8Runtime_nativeIn
 	// Log all uncaught V8 exceptions.
 	V8::AddMessageListener(logV8Exception);
 	V8::SetCaptureStackTraceForUncaughtExceptions(true);
+	
+	//Expose the Debug object through JavaScript
+	const char *flag = "--expose-debug-as=debug";
+	V8::SetFlagsFromString(flag, strlen(flag));
 
 	JavaObject::useGlobalRefs = useGlobalRefs;
 	V8Runtime::debuggerEnabled = debuggerPort >= 0;
